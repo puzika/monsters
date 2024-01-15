@@ -3,25 +3,30 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
-  constructor() {
-    super();
+	constructor() {
+		super();
 
-    this.state = {
-      name: 'Tolibjon',
-    }
-  }
+		this.state = {
+			name: 'Tolib',
+			company: 'Google',
+		};
+	}
 
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>hi {this.state.name}</p>
-          <button class="btn">Change name</button>
-        </header>
-      </div>
-    );
-  }
+	changeName() {
+		this.setState({ name: 'Tolibjon' });
+	}
+
+	render() {
+		return (
+			<div className="App">
+				<header className="App-header">
+					<img src={logo} className="App-logo" alt="logo" />
+					<p>Hi {this.state.name}, I work at {this.state.company}</p>
+					<button class="btn" onClick={this.changeName.bind(this)}>Change name</button>
+				</header>
+			</div>
+		);
+	}
 }
 
 export default App;
