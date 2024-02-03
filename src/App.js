@@ -7,30 +7,31 @@ class App extends Component {
 		super();
 
 		this.state = {
-			name: 'Tolib',
-			company: 'Google',
-		};
+			monsters: [],
+		}
 	}
 
-	changeName() {
-		this.setState(
-			() => {
-				return {
-					name: 'Tolibjon',
-				};
-			},
-			() => console.log(this.state)
-		);
+	componentDidMount() {
+		fetch('https://jsonplaceholder.typicode.com/users')
+			.then(response => response.json())
+			.then(users => this.setState({ monsters: users }));
 	}
 
 	render() {
 		return (
-			<div className="App">
-				<header className="App-header">
-					<img src={logo} className="App-logo" alt="logo" />
-					<p>Hi. I'm {this.state.name}. I work at {this.state.company}</p>
-					<button class="btn" onClick={this.changeName.bind(this)}>Change name</button>
-				</header>
+			<div className='App'>
+				<input className='search-box' type='search' placeholder='search monsters' onChange={
+					(event) => {
+						console.log(event);
+					}
+				}></input>
+				{
+					this.state.monsters.map(monster => {
+						return (
+							<h1 key={monster.id}>{monster.name}</h1>
+						);
+					})
+				}
 			</div>
 		);
 	}
